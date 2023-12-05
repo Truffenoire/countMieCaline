@@ -24,7 +24,7 @@ export default function Home() {
 
 
   return (
-   <main className='flex justify-center'>
+   <main className='flex h-screen justify-center'>
     <div className='flex w-[90%] h-screen flex-col justify-around max-w-screen-sm'>
     <Link href="/history" className='btn btn-info w-1/3 self-end'>Historique</Link>
     <div className='flex justify-around'>
