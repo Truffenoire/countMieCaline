@@ -1,6 +1,7 @@
 "use client"
 
 import Image from 'next/image'
+import Link from 'next/link'
 import { useState } from 'react'
 
 export default function Home() {
@@ -23,16 +24,19 @@ export default function Home() {
 
 
   return (
-   <main className='flex h-screen flex-col justify-center'>
+   <main className='flex justify-center'>
+    <div className='flex w-[90%] h-screen flex-col justify-around max-w-screen-sm'>
+    <Link href="/history" className='btn btn-info w-1/3 self-end'>Historique</Link>
     <div className='flex justify-around'>
-      <h1 className='h-28 w-1/2 text-center stat-value'>{countPietons}</h1>
-      <h1 className='h-28 w-1/2 text-center stat-value'>{countVoitures}</h1>
+      <h1 className='h-28 w-1/2 text-center stat-value leading-7'>{countPietons}</h1>
+      <h1 className='h-28 w-1/2 text-center stat-value leading-7'>{countVoitures}</h1>
     </div>
     <div>
       <button onClick={handlePietons} className="w-1/2 h-48 btn btn-success">Piéton</button>
       <button onClick={handleVoitures} className="w-1/2 h-48 btn btn-warning">Véhicule</button>
     </div>
-    <button onClick={handleReset} className='absolute bottom-10 left-10 btn w-1/3 btn-outline btn-error'>Reset</button>
+    <button onClick={handleReset} className='btn w-1/3 btn-outline btn-error'>Reset</button>
+    </div>
    </main>
   )
 }
