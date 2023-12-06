@@ -25,15 +25,15 @@ export default function Home() {
 
   return (
    <main className='flex h-screen justify-center'>
-    <div className='flex w-[90%] h-screen flex-col justify-around max-w-screen-sm'>
-    <Link href="/history" className='btn btn-info w-1/3 self-end'>Historique</Link>
+    <div className='flex w-[80%] h-[85vh] flex-col justify-between max-w-screen-sm'>
+    <Link href="/history" className='btn btn-outline btn-ghost w-1/3 self-end'>Historique</Link>
     <div className='flex justify-around'>
-      <h1 className='h-28 w-1/2 text-center stat-value leading-7'>{countPietons}</h1>
-      <h1 className='h-28 w-1/2 text-center stat-value leading-7'>{countVoitures}</h1>
+      <button className='h-20 w-1/2 text-center stat-value leading-7'>{countPietons}</button>
+      <button className='h-20 w-1/2 text-center stat-value leading-7'>{countVoitures}</button>
     </div>
-    <div>
-      <button onClick={handlePietons} className="w-1/2 h-48 btn btn-success">Piéton</button>
-      <button onClick={handleVoitures} className="w-1/2 h-48 btn btn-warning">Véhicule</button>
+    <div className='flex justify-center'>
+      <button onClick={handlePietons} className="w-[45%] m-1 h-48 btn btn-info btn-outline">Piéton</button>
+      <button onClick={handleVoitures} className="w-[45%] m-1 h-48 btn btn-info">Véhicule</button>
     </div>
     <button onClick={handleReset} className='btn w-1/3 btn-outline btn-error'>Reset</button>
     </div>
