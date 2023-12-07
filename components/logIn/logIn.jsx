@@ -21,7 +21,7 @@ export default function logIn() {
                 // Signed in 
                 const user = userCredential.user;
                 setUser(user)
-                console.log(user);
+                // console.log(user);
             })
             .catch((error) => {
                 const errorCode = error.code;
@@ -31,7 +31,7 @@ export default function logIn() {
     const handleLogOut = (e) => {
         e.preventDefault()
         signOut(auth).then(() => {
-            console.log(auth.currentUser);
+            // console.log(auth.currentUser);
             setUser(null)
         }).catch((error) => {
             console.log("something wrong");
@@ -43,7 +43,7 @@ export default function logIn() {
         onAuthStateChanged(auth, user => {
             if (user !== null) {
                 console.log('utilisateur connecté');
-                console.log(user.email);
+                // console.log(user.email);
                 setUser(user)
                 setUserName(user.email.split('@')[0])
             } else {
@@ -53,7 +53,7 @@ export default function logIn() {
     }, [handleLogIn])
 
     return (
-        <header>
+        <header className='max-h-[10vh]'>
             {auth.currentUser ?
                 <div className='flex items-center'>
                     <button className='btn ml-3 btn-ghost' onClick={handleLogOut}>
