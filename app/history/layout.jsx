@@ -1,11 +1,14 @@
+import Link from "next/link";
 
 export default function HistoryLayout({
-    children, // will be a page or nested layout
-  }) {
-    return (
-      <section>
-        {/* Include shared UI here e.g. a header or sidebar */}   
-        {children}
-      </section>
-    )
-  }
+  children, // will be a page or nested layout
+}) {
+  return (
+    <section>
+      <nav>
+        <Link href="/" className="btn btn-succes">Retour</Link>
+      </nav>
+      {children}
+    </section>
+  )
+}
