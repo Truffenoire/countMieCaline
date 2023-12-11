@@ -1,5 +1,6 @@
 "use client"
 import Image from 'next/image'
+import { useThemeContext } from "@/context/context.jsx"
 
 import { useState, useEffect } from 'react'
 import { getAuth, onAuthStateChanged, signInWithEmailAndPassword, createUserWithEmailAndPassword, signOut } from "firebase/auth"
@@ -7,7 +8,8 @@ import { auth } from "@/firebase/firebase";
 
 export default function logIn() {
 
-    const [user, setUser] = useState(null);
+    const {user, setUser} = useThemeContext();
+    
     const [userName, setUserName] = useState('');
 
     const [email, setEmail] = useState("");
