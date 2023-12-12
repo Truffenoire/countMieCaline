@@ -16,15 +16,16 @@ export default function logIn() {
 
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-
+    
     const handleLogIn = async (e) => {
         e.preventDefault()
         const auth = getAuth();
         await signInWithEmailAndPassword(auth, email, password)
-            .then((userCredential) => {
-                // Signed in 
-                const user = userCredential.user;
-                setUser(user)
+        .then((userCredential) => {
+            // Signed in 
+            const user = userCredential.user;
+            setUser(user)
+            toast.success('Connecté !')
                 // console.log(user);
             })
             .catch((error) => {
@@ -47,7 +48,6 @@ export default function logIn() {
     useEffect(() => {
         onAuthStateChanged(auth, user => {
             if (user !== null) {
-                toast.success('Connecté !')
                 console.log('utilisateur connecté');
                 // console.log(user.email);
                 setUser(user)

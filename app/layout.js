@@ -4,7 +4,6 @@ import { ThemeContextProvider } from '@/context/context'
 
 import LogIn from '@/components/logIn/logIn'
 
-const inter = Inter({ subsets: ['latin'] })
 
 export const metadata = {
   title: 'Compteur de passant VL/Pieton',
@@ -18,7 +17,7 @@ export default function RootLayout({ children }) {
 
   return (
     <html lang="fr">
-      <body className={inter.className}>
+      <body className="h-screen">
         <ThemeContextProvider>
           <LogIn />
           {children}

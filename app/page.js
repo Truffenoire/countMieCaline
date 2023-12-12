@@ -52,12 +52,12 @@ export default function Home() {
   const handleSave = async (e) => {
     e.preventDefault()
     if (user) {
-      const normalizeVille = (ville) => {
-        return ville.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase();
-      };
-      const inputValue = refInput.current.value;
-      const normalizedVille = normalizeVille(inputValue)
-      if (inputValue == '') {
+      // const normalizeVille = (ville) => {
+      //   return ville.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase();
+      // };
+      const inputVilleValue = refInput.current.value;
+      // const normalizedVille = normalizeVille(inputVilleValue)
+      if (inputVilleValue == '') {
         return toast.error('Vous devez renseigner la ville')
       } else {
         const currentTime = new Date();
@@ -66,7 +66,7 @@ export default function Home() {
         const formattedTime = currentTime.toLocaleDateString('fr-FR', options);
 
         const data = {
-          ville: normalizedVille,
+          ville: inputVilleValue,
           date: formattedTime,
           heure: formattedHour,
           pietons: countPietons,
