@@ -41,7 +41,7 @@ export default function index() {
       action: {
         label: 'confirmer',
         onClick: async () => {
-          // await deleteDoc(doc(db, "news", idDelete))
+          await deleteDoc(doc(db, "news", idDelete))
           const newDataArray = data.filter(item => item.id !== idDelete)
           setData(newDataArray)
         }
