@@ -4,13 +4,13 @@ import { getAuth, onAuthStateChanged, signInWithEmailAndPassword } from "firebas
 import { collection, getDocs, getDoc, deleteDoc, doc } from 'firebase/firestore'
 import { db, auth } from "@/firebase/firebase"
 import { useState, useEffect, useContext } from "react";
+import { Toaster, toast } from "sonner";
 
 import { useThemeContext } from "@/context/context.jsx"
 
 export default function index() {
 
   const { user, setUser } = useThemeContext()
-  const [ isDelete, setIsDelete ] = useState(false)
   const [data, setData] = useState([]);
 
   //recuperation des données sur la DB FIRESTORE
@@ -32,25 +32,29 @@ export default function index() {
       }
     }
     getDataList()
-  }, [isDelete])
+    // }, [isDelete])
+  }, [])
 
-  const handleDelete = async (e) => {
+  const handleDelete = (e) => {
     e.preventDefault;
     const idDelete = e.target.id
-    const isConfirmed = window.confirm('Etes-vous sûr ?')
-    if(isConfirmed){
-      await deleteDoc(doc(db, "news", idDelete))
-      // console.log('SUPPRIME');
-    }else{
-      return
-    }
-    setIsDelete(!isDelete)
+    toast('Are you sure ?', {
+      action: {
+        label: 'confirmer',
+        onClick: async () => {
+          // await deleteDoc(doc(db, "news", idDelete))
+          const newDataArray = data.filter(item => item.id !== idDelete)
+          setData(newDataArray)
+        }
+      }
+    })
   }
 
   return (
     <>
       {user ?
         <main className="flex flex-col stats shadow">
+          <Toaster position="bottom-center" />
           {data.map((item) => {
             return (
               <div key={item.id} className="stat">

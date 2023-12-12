@@ -5,9 +5,14 @@ import Link from 'next/link'
 import { doc, setDoc, getDoc, collection, addDoc } from "firebase/firestore"
 import { useEffect, useState, useRef } from 'react'
 import { db } from "../firebase/firebase"
+import { Toaster, toast } from "sonner";
+
+import { useThemeContext } from "@/context/context.jsx"
+
 
 export default function Home() {
 
+  const { user, setUser } = useThemeContext()
   const [countPietons, setCountPietons] = useState(0)
   const [countVoitures, setCountVoitures] = useState(0)
   const refInput = useRef()
@@ -42,36 +47,41 @@ export default function Home() {
     localStorage.setItem('voitures', JSON.stringify(0))
     setCountVoitures(0)
     setCountPietons(0)
+    toast.success('Comptage effacé.')
   }
-const handleSave = async (e) => {
-  e.preventDefault()
-  if(refInput.current.value == ''){
-    return alert('Vous devez renseigner la ville')
-  } else {
-    const currentTime = new Date();
-    const options = { weekday: 'long', month: 'long', day: 'numeric' };
-    const formattedHour = currentTime.toLocaleTimeString();
-    const formattedTime = currentTime.toLocaleDateString('fr-FR', options);
-    const data = {
-      ville: refInput.current.value,
-      date: formattedTime,
-      heure: formattedHour,
-      pietons: countPietons,
-      voitures: countVoitures
+  const handleSave = async (e) => {
+    e.preventDefault()
+    if(user){
+      if (refInput.current.value == '') {
+        return toast.error('Vous devez renseigner la ville')
+      } else {
+        const currentTime = new Date();
+        const options = { weekday: 'long', month: 'long', day: 'numeric' };
+        const formattedHour = currentTime.toLocaleTimeString();
+        const formattedTime = currentTime.toLocaleDateString('fr-FR', options);
+        const data = {
+          ville: refInput.current.value,
+          date: formattedTime,
+          heure: formattedHour,
+          pietons: countPietons,
+          voitures: countVoitures
+        }
+        const dataSend = await addDoc(collection(db, "news"), data)
+  
+        toast.success('Comptage validé !')
+        console.log(dataSend);
+      }
     }
-      // await setDoc(doc(db, "news", 'LA'), data)
-      const dataSend = await addDoc(collection(db, "news"), data)
-      // const docRef = doc(db, 'news', '0')
-      // const docSnap = await getDoc(docRef)
-    // console.log(docSnap.data());
-    console.log(dataSend);
+    else{
+      toast('vous devez être log')
+    }
   }
-}
 
 
 
   return (
     <main className='flex h-screen justify-center max-h-[90vh]'>
+      <Toaster position="bottom-center" />
       <div className='flex w-[80%] max-h-[80vh] flex-col justify-between max-w-screen-sm'>
         <div className='flex justify-between'>
           <input ref={refInput} type="text" placeholder="votre ville" className="input input-bordered input-info w-1/2 max-w-xs" />
