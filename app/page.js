@@ -80,7 +80,7 @@ export default function Home() {
 
 
   return (
-    <main className='flex h-screen justify-center max-h-[90vh]'>
+    <main className='flex h-screen justify-center max-h-[85vh]'>
       <Toaster position="bottom-center" />
       <div className='flex w-[80%] max-h-[80vh] flex-col justify-between max-w-screen-sm'>
         <div className='flex justify-between'>

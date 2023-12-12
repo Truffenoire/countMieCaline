@@ -15,7 +15,6 @@ export default function index() {
 
   //recuperation des données sur la DB FIRESTORE
   useEffect(() => {
-    console.log(user);
     const getDataList = async () => {
       try {
         const dataCollectionRef = collection(db, "news")

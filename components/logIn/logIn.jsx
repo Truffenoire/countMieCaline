@@ -5,6 +5,8 @@ import { useThemeContext } from "@/context/context.jsx"
 import { useState, useEffect } from 'react'
 import { getAuth, onAuthStateChanged, signInWithEmailAndPassword, createUserWithEmailAndPassword, signOut } from "firebase/auth"
 import { auth } from "@/firebase/firebase";
+import { Toaster, toast } from "sonner";
+
 
 export default function logIn() {
 
@@ -33,10 +35,11 @@ export default function logIn() {
     const handleLogOut = (e) => {
         e.preventDefault()
         signOut(auth).then(() => {
+            toast.info('Deconnecté !')
             // console.log(auth.currentUser);
             setUser(null)
         }).catch((error) => {
-            console.log("something wrong");
+            toast.error("something wrong");
         })
         console.log(auth.currentUser);
     }
@@ -44,6 +47,7 @@ export default function logIn() {
     useEffect(() => {
         onAuthStateChanged(auth, user => {
             if (user !== null) {
+                toast.success('Connecté !')
                 console.log('utilisateur connecté');
                 // console.log(user.email);
                 setUser(user)
@@ -55,7 +59,7 @@ export default function logIn() {
     }, [handleLogIn])
 
     return (
-        <header className='max-h-[10vh]'>
+        <header className='max-h-[10vh] bg-sky-500/50 mb-3 rounded-b-lg'>
             {auth.currentUser ?
                 <div className='flex items-center'>
                     <button className='btn ml-3 btn-ghost' onClick={handleLogOut}>
