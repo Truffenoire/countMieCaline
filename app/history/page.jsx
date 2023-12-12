@@ -11,7 +11,7 @@ import { useThemeContext } from "@/context/context.jsx"
 export default function index() {
 
   const { user, setUser } = useThemeContext()
-  const [data, setData] = useState([]);
+  const {data, setData} = useThemeContext([]);
 
   //recuperation des données sur la DB FIRESTORE
   useEffect(() => {
@@ -24,7 +24,7 @@ export default function index() {
           //recuperation de l'objet en ajoutant l'entrée ID
           id: doc.id
         }));
-        console.log(newsList);
+        // console.log(newsList);
         setData(newsList)
       } catch (err) {
         console.error(err)

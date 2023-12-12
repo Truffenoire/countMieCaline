@@ -69,7 +69,7 @@ export default function Home() {
         const dataSend = await addDoc(collection(db, "news"), data)
   
         toast.success('Comptage validé !')
-        console.log(dataSend);
+        // console.log(dataSend);
       }
     }
     else{
